@@ -1,4 +1,5 @@
 .basicLightbox--visible {
+  position: relative;
   overflow: hidden;
   width: 100vw;
   height: 100vh;
@@ -13,10 +14,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  @include transition(opacity);
 }
 
 .basicLightbox--visible .basicLightbox__placeholder {
-  transform: scale(1);
+  transform: translate(-50%, -52%) scale(1);
   opacity: 1;
 }
 
@@ -24,18 +26,18 @@
   overflow: scroll;
   padding: 48px 12px 40px 12px;
   width: calc(100% - 40px);
-  height: auto;
-  max-height: calc(100% - 40px);
-  margin-top: 20px;
-  margin-bottom: 38px;
+  // height: auto;
+  max-height: calc(100% - 58px);
+  // margin-top: 20px;
+  // margin-bottom: 38px;
   background-color: white;
   position: relative;
   opacity: 0;
 
-  // position: absolute;
-  // top: 50%;
-  // left: 50%;
-  transform: translate(-50%, -50%) scale(0.7);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: scale(0.5);
   @include transition(transform, opacity);
   transition-duration: 350ms;
 }
