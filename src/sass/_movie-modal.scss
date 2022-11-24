@@ -108,6 +108,7 @@
   }
 
   &__meta-value-list {
+    margin-left: 40px;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -222,10 +223,6 @@
     &__image {
       width: 254px;
       height: 374px;
-    }
-
-    &__meta-value-list {
-      margin-left: 40px;
     }
 
     &__watched-button {
