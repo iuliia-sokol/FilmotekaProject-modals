@@ -1,0 +1,224 @@
+.basicLightbox--visible {
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  opacity: 1;
+  z-index: 100;
+}
+
+.basicLightbox--visible .basicLightbox__placeholder {
+  transform: translate(-50%, -50%);
+}
+
+.basicLightbox__placeholder {
+  padding: 48px 12px 40px 12px;
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: white;
+  border: 1px solid greenyellow;
+  transform: translate(-50%, -150%);
+  @include transition(transform);
+  // transition-duration: 350ms;
+}
+
+.lightbox-modal {
+  border: 1px solid red;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  &__close-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 30px;
+    height: 30px;
+    padding: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    z-index: 10;
+    background-color: transparent;
+    border: none;
+    @include transition(transform);
+
+    &:hover,
+    :focus {
+      transform: scale(1.2);
+    }
+  }
+
+  &__img-wrapper {
+    background-color: grey;
+    position: relative;
+    @include transition(transform);
+    border: 1px solid green;
+  }
+
+  &__image {
+    width: 240px;
+    height: 357px;
+    border-radius: 5px;
+  }
+
+  &__data {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border: 1px solid greenyellow;
+  }
+
+  &__title {
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #000000;
+    font-size: 20px;
+    line-height: 1.15;
+    margin-bottom: 20px;
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.33;
+    margin-bottom: 20px;
+  }
+
+  &__meta-title-list {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    row-gap: 8px;
+    color: #8c8c8c;
+  }
+
+  &__meta-value-list {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    row-gap: 8px;
+    color: #000000;
+  }
+
+  &__meta-value-vote {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    padding: 1px 9px;
+    background: #ff6b01;
+    border-radius: 5px;
+    color: #ffffff;
+    line-height: 1.17;
+  }
+  &__meta-value-votes-divider {
+    margin-left: 3px;
+    color: #8c8c8c;
+  }
+  &__meta-value-votes {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    padding: 1px 4px;
+    background-color: #f7f7f7;
+    border-radius: 5px;
+    line-height: 1.17;
+  }
+  &__meta-value-title {
+    text-transform: uppercase;
+  }
+
+  &__description {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.67;
+    color: #000000;
+  }
+
+  &__description-title {
+    display: block;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+}
+
+@media screen and (min-width: $mobile) {
+  .basicLightbox__placeholder {
+    width: 280px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
+}
+
+@media screen and (min-width: $tablet) {
+  .basicLightbox__placeholder {
+    width: 704px;
+    padding: 40px 72px 40px 36px;
+  }
+
+  .lightbox-modal {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    column-gap: 68px;
+
+    &__image {
+      width: 254px;
+      height: 374px;
+    }
+
+    &__meta-value-list {
+      margin-left: 40px;
+    }
+  }
+}
+
+@media screen and (min-width: $desktop) {
+  .basicLightbox__placeholder {
+    width: 806px;
+    padding: 40px 12px;
+  }
+
+  .lightbox-modal {
+    column-gap: 16px;
+
+    &__image {
+      width: 375px;
+      height: 478px;
+    }
+
+    &__img-wrapper {
+      flex-grow: 0;
+    }
+
+    &__data {
+      flex-grow: 1;
+    }
+
+    &__title {
+      font-weight: 500;
+      font-size: 30px;
+      line-height: 35px;
+    }
+
+    &__meta-value-list {
+      margin-left: 84px;
+    }
+  }
+}
