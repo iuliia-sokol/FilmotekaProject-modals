@@ -1,5 +1,5 @@
 .basicLightbox--visible {
-  overflow-y: scroll;
+  overflow: auto;
   width: 100vw;
   height: 100vh;
   display: block;
@@ -17,10 +17,11 @@
 }
 
 .basicLightbox__placeholder {
-  overflow-y: scroll;
+  overflow: auto;
   padding: 48px 12px 40px 12px;
   width: 100%;
   height: auto;
+  max-height: calc(100% - 40px);
   position: absolute;
   top: 50%;
   left: 50%;
@@ -32,7 +33,7 @@
 
 .lightbox-modal {
   width: 100%;
-  height: 100%;
+  height: auto;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -205,6 +206,8 @@
 @media screen and (min-width: $tablet) {
   .basicLightbox__placeholder {
     width: 704px;
+    height: fit-content;
+    max-height: 552px;
     padding: 40px 72px 40px 36px;
   }
 
@@ -243,6 +246,7 @@
 
   .basicLightbox__placeholder {
     width: 806px;
+    max-height: 558px;
     padding: 40px 12px;
   }
 
