@@ -1,4 +1,5 @@
 .basicLightbox--visible {
+  overflow-y: scroll;
   width: 100vw;
   height: 100vh;
   display: block;
@@ -8,6 +9,7 @@
   background-color: transparent;
   opacity: 1;
   z-index: 100;
+  background: rgba(0, 0, 0, 0.25);
 }
 
 .basicLightbox--visible .basicLightbox__placeholder {
@@ -15,20 +17,20 @@
 }
 
 .basicLightbox__placeholder {
+  overflow-y: scroll;
   padding: 48px 12px 40px 12px;
   width: 100%;
+  height: fit-content;
   position: absolute;
   top: 50%;
   left: 50%;
   background-color: white;
-  border: 1px solid greenyellow;
   transform: translate(-50%, -150%);
   @include transition(transform);
   // transition-duration: 350ms;
 }
 
 .lightbox-modal {
-  border: 1px solid red;
   width: 100%;
   height: 100%;
   display: flex;
@@ -59,10 +61,11 @@
   }
 
   &__img-wrapper {
+    margin-bottom: 20px;
+    height: fit-content;
     background-color: grey;
     position: relative;
     @include transition(transform);
-    border: 1px solid green;
   }
 
   &__image {
@@ -75,7 +78,6 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    border: 1px solid greenyellow;
   }
 
   &__title {
@@ -155,6 +157,41 @@
     text-transform: uppercase;
     margin-bottom: 8px;
   }
+
+  &__buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__watched-button {
+    width: 110px;
+    height: 44px;
+    margin-right: 20px;
+    padding: 6px 14px;
+    border: none;
+    background-color: #ff6b01;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.33;
+    color: #fff;
+  }
+
+  &__queque-button {
+    width: 110px;
+    height: 44px;
+    padding: 6px 14px;
+    background-color: transparent;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.33;
+  }
 }
 
 @media screen and (min-width: $mobile) {
@@ -178,6 +215,10 @@
     justify-content: flex-start;
     column-gap: 68px;
 
+    &__img-wrapper {
+      margin-bottom: 0;
+    }
+
     &__image {
       width: 254px;
       height: 374px;
@@ -186,10 +227,25 @@
     &__meta-value-list {
       margin-left: 40px;
     }
+
+    &__watched-button {
+      margin-right: 15px;
+      width: 125px;
+      padding: 14px 9px 12px 9px;
+    }
+
+    &__queque-button {
+      width: 125px;
+      padding: 14px 9px 12px 9px;
+    }
   }
 }
 
 @media screen and (min-width: $desktop) {
+  .basicLightbox--visible {
+    background: rgba(0, 0, 0, 0);
+  }
+
   .basicLightbox__placeholder {
     width: 806px;
     padding: 40px 12px;
@@ -219,6 +275,16 @@
 
     &__meta-value-list {
       margin-left: 84px;
+    }
+
+    &__watched-button {
+      width: 135px;
+      padding: 14px 10px 12px 10px;
+    }
+
+    &__queque-button {
+      width: 135px;
+      padding: 14px 10px 12px 10px;
     }
   }
 }

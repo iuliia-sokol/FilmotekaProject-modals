@@ -78,6 +78,9 @@ function onFilmCardClick(event) {
 Four of the West’s most infamous outlaws assemble to steal a huge stash of gold from the most corrupt settlement of the gold rush towns. But not all goes to plan one is killed and the other three escapes with bags of gold hide out in the abandoned gold mine where they happen across another gang of three – who themselves were planning to hit the very same bank! As tensions rise, things go from bad to worse as they realise the bags of gold are filled with lead... they’ve been double crossed – but by who and how?
 </p>
 
+<div class="lightbox-modal__buttons">
+<button type="button" class="lightbox-modal__watched-button">Add to Watched</button>
+<button type="button" class="lightbox-modal__queque-button">add to queue</button>
 </div>
 
 </div>`,
