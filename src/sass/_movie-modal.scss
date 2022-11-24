@@ -1,5 +1,5 @@
 .basicLightbox--visible {
-  // overflow: auto;
+  overflow: hidden;
   width: 100vw;
   height: 100vh;
   display: block;
@@ -19,13 +19,13 @@
 .basicLightbox__placeholder {
   overflow: auto;
   padding: 48px 12px 40px 12px;
-  width: 100%;
+  width: calc(100% - 40px);
   height: auto;
   max-height: calc(100% - 40px);
+  background-color: white;
   position: absolute;
   top: 50%;
   left: 50%;
-  background-color: white;
   transform: translate(-50%, -150%);
   @include transition(transform);
   // transition-duration: 350ms;
