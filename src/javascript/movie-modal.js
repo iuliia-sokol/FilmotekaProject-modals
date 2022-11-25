@@ -37,8 +37,10 @@ function onFilmCardClick(event) {
     fetchData(filmId).then(result => {
       const data = result.data;
       console.log(data);
+
       const filmData = {
         id: data.id,
+        poster: `https://image.tmdb.org/t/p/w500${data.poster_path}`,
         title: data.title,
         originalTitle: data.original_title,
         genres: [],
@@ -51,8 +53,10 @@ function onFilmCardClick(event) {
       data.genres.forEach(genre => {
         filmData.genres.push(genre.name);
       });
+      filmData.genres = filmData.genres.join(', ');
       console.log(filmData);
-      createModalMarkUp();
+
+      createModalMarkUp(filmData);
     });
   } catch {
     er => {
@@ -81,7 +85,17 @@ async function fetchData(filmId) {
   return response;
 }
 
-function createModalMarkUp() {
+function createModalMarkUp({
+  id,
+  poster,
+  title,
+  originalTitle,
+  genres,
+  popularity,
+  overview,
+  vote_average,
+  vote_count,
+}) {
   const instance = basicLightbox.create(
     `
    <div class="lightbox-modal">
@@ -92,16 +106,13 @@ function createModalMarkUp() {
     >&#10005;
     </button>
 <div class="lightbox-modal__img-wrapper">
- <img class="image-display lightbox-modal__image"
-  srcset="#"
-  src="#"
-  data-source="#"
-  loading="lazy"
-  alt="#"/>
+ <img class="lightbox-modal__image"
+  src="${poster}"
+  alt="${title}"/>
 </div>
 
 <div class="lightbox-modal__data">
-<p class="lightbox-modal__title" data-title>A FISTFUL OF LEAD</p>
+<p class="lightbox-modal__title" data-title>${title}</p>
 
 <div class="lightbox-modal__meta">
 <div class="lightbox-modal__meta-title">
@@ -115,22 +126,22 @@ function createModalMarkUp() {
 
 <div class="lightbox-modal__meta-value">
 <ul class="lightbox-modal__meta-value-list">
-<li class="lightbox-modal__meta-value-list-item"><span class="lightbox-modal__meta-value-vote" data-vote>7.3</span><span class="lightbox-modal__meta-value-votes-divider">/</span><span class="lightbox-modal__meta-value-votes" data-votes>1260</span></li>
-<li class="lightbox-modal__meta-value-list-item"><span data-popularity>100.2</span></li>
-<li class="lightbox-modal__meta-value-list-item"><span class="lightbox-modal__meta-value-title" data-original-title>A FISTFUL OF LEAD</span></li>
-<li class="lightbox-modal__meta-value-list-item"><span data-genre>Western</span></li>
+<li class="lightbox-modal__meta-value-list-item"><span class="lightbox-modal__meta-value-vote" data-vote>${vote_average}</span><span class="lightbox-modal__meta-value-votes-divider">/</span><span class="lightbox-modal__meta-value-votes" data-votes>${vote_count}</span></li>
+<li class="lightbox-modal__meta-value-list-item"><span data-popularity>${popularity}</span></li>
+<li class="lightbox-modal__meta-value-list-item"><span class="lightbox-modal__meta-value-title" data-original-title>${originalTitle}</span></li>
+<li class="lightbox-modal__meta-value-list-item"><span data-genre>${genres}</span></li>
 </ul>
 </div>
 </div>
 
 <p class="lightbox-modal__description">
 <span class="lightbox-modal__description-title">About</span>
-Four of the West’s most infamous outlaws assemble to steal a huge stash of gold from the most corrupt settlement of the gold rush towns. But not all goes to plan one is killed and the other three escapes with bags of gold hide out in the abandoned gold mine where they happen across another gang of three – who themselves were planning to hit the very same bank! As tensions rise, things go from bad to worse as they realise the bags of gold are filled with lead... they’ve been double crossed – but by who and how?
+${overview}
 </p>
 
 <div class="lightbox-modal__buttons">
 <button type="button" class="lightbox-modal__watched-button">Add to Watched</button>
-<button type="button" class="lightbox-modal__queque-button">add to queue</button>
+<button type="button" class="lightbox-modal__queque-button">Add to queue</button>
 </div>
 
 </div>`,

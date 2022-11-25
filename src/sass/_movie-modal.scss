@@ -23,7 +23,7 @@
 
 .basicLightbox__placeholder {
   overflow: scroll;
-  padding: 48px 12px 40px 12px;
+  padding: 48px 20px 40px 20px;
   width: calc(100% - 40px);
   // height: auto;
   max-height: 85vh;
@@ -73,7 +73,9 @@
   }
 
   &__img-wrapper {
+    flex-shrink: 0;
     margin-bottom: 20px;
+    width: fit-content;
     height: fit-content;
     background-color: grey;
     position: relative;
