@@ -31,12 +31,10 @@ function onFilmCardClick(event) {
   const selectedProduct = getSelectedItem(event, allProducts);
 
   const filmId = selectedProduct.dataset.id;
-  console.log(filmId);
 
   try {
     fetchData(filmId).then(result => {
       const data = result.data;
-      console.log(data);
 
       const filmData = {
         id: data.id,
@@ -54,17 +52,25 @@ function onFilmCardClick(event) {
         filmData.genres.push(genre.name);
       });
       filmData.genres = filmData.genres.join(', ');
-      console.log(filmData);
 
       createModalMarkUp(filmData);
+
+      const addToWatchedBtn = document.querySelector(
+        '.lightbox-modal__watched-button'
+      );
+
+      const addToQuequeBtn = document.querySelector(
+        '.lightbox-modal__queque-button'
+      );
+
+      addToWatchedBtn.addEventListener('click', onAddToWatchedClick);
+      addToQuequeBtn.addEventListener('click', onAddToQuequeClick);
     });
   } catch {
     er => {
       console.log(er);
     };
   }
-
-  //  CREATE MODAL
 }
 
 async function fetchData(filmId) {
@@ -140,8 +146,8 @@ ${overview}
 </p>
 
 <div class="lightbox-modal__buttons">
-<button type="button" class="lightbox-modal__watched-button">Add to Watched</button>
-<button type="button" class="lightbox-modal__queque-button">Add to queue</button>
+<button type="button" class="lightbox-modal__watched-button" data-id="${id}">Add to Watched</button>
+<button type="button" class="lightbox-modal__queque-button" data-id="${id}">Add to queue</button>
 </div>
 
 </div>`,
@@ -160,4 +166,14 @@ ${overview}
     }
   );
   instance.show();
+}
+
+function onAddToWatchedClick(event) {
+  event.preventDefault();
+  event.target.textContent = 'Added to watched';
+}
+
+function onAddToQuequeClick(event) {
+  event.preventDefault();
+  event.target.textContent = 'Added to queque';
 }
