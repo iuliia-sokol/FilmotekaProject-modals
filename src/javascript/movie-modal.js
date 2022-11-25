@@ -1,4 +1,5 @@
 import * as basicLightbox from 'basiclightbox';
+import axios from 'axios';
 import { refs } from './refs';
 
 const lightboxedCard = document.querySelectorAll('.list__item');
@@ -6,7 +7,7 @@ const lightboxedCard = document.querySelectorAll('.list__item');
 lightboxedCard.forEach(item => item.addEventListener('click', openLightbox));
 
 const allProducts = [...lightboxedCard];
-console.log(allProducts);
+// console.log(allProducts);
 
 function getSelectedItem(event, array) {
   const selectedProduct = array.find(
@@ -18,7 +19,7 @@ function getSelectedItem(event, array) {
 function openLightbox(event) {
   event.preventDefault();
 
-  if (event.target.nodeName !== 'LI' && event.target.nodeName !== 'BUTTON') {
+  if (event.target.nodeName !== 'LI') {
     return;
   }
   if (event.target.nodeName === 'LI') {
@@ -28,10 +29,59 @@ function openLightbox(event) {
 
 function onFilmCardClick(event) {
   const selectedProduct = getSelectedItem(event, allProducts);
-  console.log(selectedProduct);
+
+  const filmId = selectedProduct.dataset.id;
+  console.log(filmId);
+
+  try {
+    fetchData(filmId).then(result => {
+      const data = result.data;
+      console.log(data);
+      const filmData = {
+        id: data.id,
+        title: data.title,
+        originalTitle: data.original_title,
+        genres: [],
+        popularity: data.popularity,
+        overview: data.overview,
+        vote_average: data.vote_average,
+        vote_count: data.vote_count,
+      };
+
+      data.genres.forEach(genre => {
+        filmData.genres.push(genre.name);
+      });
+      console.log(filmData);
+      createModalMarkUp();
+    });
+  } catch {
+    er => {
+      console.log(er);
+    };
+  }
 
   //  CREATE MODAL
+}
 
+async function fetchData(filmId) {
+  const API_KEY = '663bd5fd8d905b7ce2d57e9867d3492e';
+
+  const searchParams = new URLSearchParams({
+    api_key: API_KEY,
+    language: 'en-US',
+  });
+
+  const url = `https://api.themoviedb.org/3/movie/${filmId}?${searchParams}`;
+
+  const response = await axios.get(url);
+  if (response.status === 404) {
+    // Notify.failure('Oops, no pics found. Please try again', notifySettings);
+    return Promise.reject();
+  }
+  return response;
+}
+
+function createModalMarkUp() {
   const instance = basicLightbox.create(
     `
    <div class="lightbox-modal">
