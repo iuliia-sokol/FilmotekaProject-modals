@@ -3,6 +3,7 @@ import axios from 'axios';
 import { refs } from './refs';
 
 const lightboxedCard = document.querySelectorAll('.list__item');
+console.log();
 
 lightboxedCard.forEach(item => item.addEventListener('click', openLightbox));
 
